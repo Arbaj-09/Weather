@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="weather-card">
+    <h2>Weather App</h2>
+    <input
+      type="text"
+      [(ngModel)]="cityName"
+      placeholder="Enter city name"
+      (keyup.enter)="getWeather()"
+    />
+    <button (click)="getWeather()">Get Weather</button>
+
+    <div *ngIf="loading" class="loading">Loading...</div>
+
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <div *ngIf="weatherData" id="weather-info">
+      <h3>{{ weatherData.name }}, {{ weatherData.sys.country }}</h3>
+      <img [src]="iconUrl" id="weather-icon" alt="Weather Icon" />
+      <div id="temperature">{{ weatherData.main.temp }} °C</div>
+      <div id="description">{{ weatherData.weather[0]?.description | uppercase }}</div>
+      <div id="wind-speed">Wind Speed: {{ weatherData.wind.speed }} m/s</div>
+      <div id="humidity">Humidity: {{ weatherData.main.humidity }}%</div>
+      <div id="date">{{ currentDate }}</div>
+    </div>
+  </div>
+</div>
